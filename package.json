@@ -6,7 +6,6 @@
     "generate:backgrounds": "node scripts/generate-background-manifest.mjs",
     "predev": "npm run generate:backgrounds",
     "prebuild": "npm run generate:backgrounds",
-    "prestart": "npm run generate:backgrounds",
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
