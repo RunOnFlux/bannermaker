@@ -22,6 +22,11 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: "Internal Banner Generator",
   description: "Internal Marketing",
+  icons: {
+    icon: "/Flux_blue.svg",
+    shortcut: "/Flux_blue.svg",
+    apple: "/Flux_blue.svg",
+  },
 };
 
 export default function RootLayout({
