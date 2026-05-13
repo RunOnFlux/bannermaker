@@ -7,7 +7,7 @@
     "predev": "npm run generate:backgrounds",
     "prebuild": "npm run generate:backgrounds",
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
