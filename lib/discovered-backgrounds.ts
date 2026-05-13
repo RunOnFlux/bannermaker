@@ -54,6 +54,10 @@ export const DISCOVERED_FLUX_BACKGROUNDS: BackgroundOption[] = [
 ]
 
 export const DISCOVERED_SSP_BACKGROUNDS: BackgroundOption[] = [
+  { id: 'ssp-1 hour setup-image', name: '1 Hour Setup', path: '/products/ssp/backgrounds/1 hour setup.png', thumbnail: '/products/ssp/backgrounds/thumbnails/1 hour setup.jpg' },
+  { id: 'ssp-1 hour setup-video', name: '1 Hour Setup (Video)', path: '/products/ssp/backgrounds/1 hour setup.mp4', thumbnail: '/products/ssp/backgrounds/thumbnails/1 hour setup.jpg', type: 'video' },
+  { id: 'ssp-90 percent cheaper than alternatives-image', name: '90 Percent Cheaper Than Alternatives', path: '/products/ssp/backgrounds/90 percent cheaper than alternatives.png', thumbnail: '/products/ssp/backgrounds/thumbnails/90 percent cheaper than alternatives.jpg' },
+  { id: 'ssp-90 percent cheaper than alternatives-video', name: '90 Percent Cheaper Than Alternatives (Video)', path: '/products/ssp/backgrounds/90 percent cheaper than alternatives.mp4', thumbnail: '/products/ssp/backgrounds/thumbnails/90 percent cheaper than alternatives.jpg', type: 'video' },
   { id: 'ssp-biometric security-video', name: 'Biometric Security (Video)', path: '/products/ssp/backgrounds/biometric security.mp4', thumbnail: '/products/ssp/backgrounds/biometric security.mp4', type: 'video' },
   { id: 'ssp-biometrics security-image', name: 'Biometrics Security', path: '/products/ssp/backgrounds/biometrics security.png', thumbnail: '/products/ssp/backgrounds/thumbnails/biometrics security.jpg' },
   { id: 'ssp-complete audit trail-image', name: 'Complete Audit Trail', path: '/products/ssp/backgrounds/complete audit trail.png', thumbnail: '/products/ssp/backgrounds/thumbnails/complete audit trail.jpg' },
@@ -66,6 +70,8 @@ export const DISCOVERED_SSP_BACKGROUNDS: BackgroundOption[] = [
   { id: 'ssp-multi chain native-video', name: 'Multi Chain Native (Video)', path: '/products/ssp/backgrounds/multi chain native.mp4', thumbnail: '/products/ssp/backgrounds/thumbnails/multi chain native.jpg', type: 'video' },
   { id: 'ssp-multi party approval-image', name: 'Multi Party Approval', path: '/products/ssp/backgrounds/multi party approval.png', thumbnail: '/products/ssp/backgrounds/thumbnails/multi party approval.jpg' },
   { id: 'ssp-mutli part approval-video', name: 'Mutli Part Approval (Video)', path: '/products/ssp/backgrounds/mutli part approval.mp4', thumbnail: '/products/ssp/backgrounds/mutli part approval.mp4', type: 'video' },
+  { id: 'ssp-no vendor lock in-image', name: 'No Vendor Lock In', path: '/products/ssp/backgrounds/no vendor lock in.png', thumbnail: '/products/ssp/backgrounds/thumbnails/no vendor lock in.jpg' },
+  { id: 'ssp-no vendor lock in-video', name: 'No Vendor Lock In (Video)', path: '/products/ssp/backgrounds/no vendor lock in.mp4', thumbnail: '/products/ssp/backgrounds/thumbnails/no vendor lock in.jpg', type: 'video' },
   { id: 'ssp-sec audit halbron-video', name: 'Sec Audit Halbron (Video)', path: '/products/ssp/backgrounds/sec audit halbron.mp4', thumbnail: '/products/ssp/backgrounds/sec audit halbron.mp4', type: 'video' },
   { id: 'ssp-security audited halborn-image', name: 'Security Audited Halborn', path: '/products/ssp/backgrounds/security audited halborn.png', thumbnail: '/products/ssp/backgrounds/thumbnails/security audited halborn.jpg' },
   { id: 'ssp-true self custody-image', name: 'True Self Custody', path: '/products/ssp/backgrounds/true self custody.png', thumbnail: '/products/ssp/backgrounds/thumbnails/true self custody.jpg' },
