@@ -205,7 +205,7 @@ export function BannerEditor() {
                 }`}
               >
                 <Image
-                  src="/products/ssp/logo.svg"
+                  src={PRODUCTS.ssp.logoPath}
                   alt="SSP logo"
                   width={190}
                   height={56}
