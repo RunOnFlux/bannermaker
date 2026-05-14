@@ -244,7 +244,7 @@ export const PRODUCTS: Record<ProductConfig['id'], ProductConfig> = {
     id: 'ssp',
     name: 'SSP',
     subtitle: 'SSP Marketing',
-    logoPath: '/products/ssp/logo.svg',
+    logoPath: '/products/ssp/ssp-enterprise-black.png',
     defaults: {
       headline: 'Write an SSP headline here',
       subtext: 'Add SSP-specific marketing copy. You can remove this line if not needed.',
