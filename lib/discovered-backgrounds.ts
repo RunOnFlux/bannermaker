@@ -77,3 +77,40 @@ export const DISCOVERED_SSP_BACKGROUNDS: BackgroundOption[] = [
   { id: 'ssp-true self custody-image', name: 'True Self Custody', path: '/products/ssp/backgrounds/true self custody.png', thumbnail: '/products/ssp/backgrounds/thumbnails/true self custody.jpg' },
   { id: 'ssp-true self custody-video', name: 'True Self Custody (Video)', path: '/products/ssp/backgrounds/true self custody.mp4', thumbnail: '/products/ssp/backgrounds/thumbnails/true self custody.jpg', type: 'video' }
 ]
+
+export const DISCOVERED_ZELCORE_BACKGROUNDS: BackgroundOption[] = [
+  { id: 'zelcore-100k-assets-in-one-wallet-image', name: '100k Assets In One Wallet', path: '/products/zelcore/backgrounds/100k-assets-in-one-wallet.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/100k-assets-in-one-wallet.jpg' },
+  { id: 'zelcore-100k-assets-in-one-wallet-video', name: '100k Assets In One Wallet (Video)', path: '/products/zelcore/backgrounds/100k-assets-in-one-wallet.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/100k-assets-in-one-wallet.jpg', type: 'video' },
+  { id: 'zelcore-80-plus-blockchains-supported-image', name: '80 Plus Blockchains Supported', path: '/products/zelcore/backgrounds/80-plus-blockchains-supported.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/80-plus-blockchains-supported.jpg' },
+  { id: 'zelcore-80-plus-blockchains-supported-video', name: '80 Plus Blockchains Supported (Video)', path: '/products/zelcore/backgrounds/80-plus-blockchains-supported.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/80-plus-blockchains-supported.jpg', type: 'video' },
+  { id: 'zelcore-biometric-security-image', name: 'Biometric Security', path: '/products/zelcore/backgrounds/biometric-security.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/biometric-security.jpg' },
+  { id: 'zelcore-biometric-security-video', name: 'Biometric Security (Video)', path: '/products/zelcore/backgrounds/biometric-security.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/biometric-security.jpg', type: 'video' },
+  { id: 'zelcore-built-for-real-users-image', name: 'Built For Real Users', path: '/products/zelcore/backgrounds/built-for-real-users.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-for-real-users.jpg' },
+  { id: 'zelcore-built-for-real-users-video', name: 'Built For Real Users (Video)', path: '/products/zelcore/backgrounds/built-for-real-users.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-for-real-users.jpg', type: 'video' },
+  { id: 'zelcore-built-in-swap-access-image', name: 'Built In Swap Access', path: '/products/zelcore/backgrounds/built-in-swap-access.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-in-swap-access.jpg' },
+  { id: 'zelcore-built-in-swap-access-video', name: 'Built In Swap Access (Video)', path: '/products/zelcore/backgrounds/built-in-swap-access.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-in-swap-access.jpg', type: 'video' },
+  { id: 'zelcore-buy-sell-send-receive-image', name: 'Buy Sell Send Receive', path: '/products/zelcore/backgrounds/buy-sell-send-receive.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/buy-sell-send-receive.jpg' },
+  { id: 'zelcore-buy-sell-send-receive-video', name: 'Buy Sell Send Receive (Video)', path: '/products/zelcore/backgrounds/buy-sell-send-receive.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/buy-sell-send-receive.jpg', type: 'video' },
+  { id: 'zelcore-desktop-mobile-and-browser-image', name: 'Desktop Mobile And Browser', path: '/products/zelcore/backgrounds/desktop-mobile-and-browser.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/desktop-mobile-and-browser.jpg' },
+  { id: 'zelcore-desktop-mobile-and-browser-video', name: 'Desktop Mobile And Browser (Video)', path: '/products/zelcore/backgrounds/desktop-mobile-and-browser.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/desktop-mobile-and-browser.jpg', type: 'video' },
+  { id: 'zelcore-free-forever-core-wallet-image', name: 'Free Forever Core Wallet', path: '/products/zelcore/backgrounds/free-forever-core-wallet.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/free-forever-core-wallet.jpg' },
+  { id: 'zelcore-free-forever-core-wallet-video', name: 'Free Forever Core Wallet (Video)', path: '/products/zelcore/backgrounds/free-forever-core-wallet.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/free-forever-core-wallet.jpg', type: 'video' },
+  { id: 'zelcore-hardware-wallet-support-image', name: 'Hardware Wallet Support', path: '/products/zelcore/backgrounds/hardware-wallet-support.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/hardware-wallet-support.jpg' },
+  { id: 'zelcore-hardware-wallet-support-video', name: 'Hardware Wallet Support (Video)', path: '/products/zelcore/backgrounds/hardware-wallet-support.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/hardware-wallet-support.jpg', type: 'video' },
+  { id: 'zelcore-non-custodial-by-design-image', name: 'Non Custodial By Design', path: '/products/zelcore/backgrounds/non-custodial-by-design.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/non-custodial-by-design.jpg' },
+  { id: 'zelcore-non-custodial-by-design-video', name: 'Non Custodial By Design (Video)', path: '/products/zelcore/backgrounds/non-custodial-by-design.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/non-custodial-by-design.jpg', type: 'video' },
+  { id: 'zelcore-one-wallet-full-ownership-image', name: 'One Wallet Full Ownership', path: '/products/zelcore/backgrounds/one-wallet-full-ownership.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/one-wallet-full-ownership.jpg' },
+  { id: 'zelcore-one-wallet-full-ownership-video', name: 'One Wallet Full Ownership (Video)', path: '/products/zelcore/backgrounds/one-wallet-full-ownership.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/one-wallet-full-ownership.jpg', type: 'video' },
+  { id: 'zelcore-optional-decentralized-2fa-image', name: 'Optional Decentralized 2fa', path: '/products/zelcore/backgrounds/optional-decentralized-2fa.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/optional-decentralized-2fa.jpg' },
+  { id: 'zelcore-optional-decentralized-2fa-video', name: 'Optional Decentralized 2fa (Video)', path: '/products/zelcore/backgrounds/optional-decentralized-2fa.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/optional-decentralized-2fa.jpg', type: 'video' },
+  { id: 'zelcore-portfolio-visibility-image', name: 'Portfolio Visibility', path: '/products/zelcore/backgrounds/portfolio-visibility.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/portfolio-visibility.jpg' },
+  { id: 'zelcore-portfolio-visibility-video', name: 'Portfolio Visibility (Video)', path: '/products/zelcore/backgrounds/portfolio-visibility.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/portfolio-visibility.jpg', type: 'video' },
+  { id: 'zelcore-true-self-custody-image', name: 'True Self Custody', path: '/products/zelcore/backgrounds/true-self-custody.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/true-self-custody.jpg' },
+  { id: 'zelcore-true-self-custody-video', name: 'True Self Custody (Video)', path: '/products/zelcore/backgrounds/true-self-custody.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/true-self-custody.jpg', type: 'video' },
+  { id: 'zelcore-web3-ready-image', name: 'Web3 Ready', path: '/products/zelcore/backgrounds/web3-ready.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/web3-ready.jpg' },
+  { id: 'zelcore-web3-ready-video', name: 'Web3 Ready (Video)', path: '/products/zelcore/backgrounds/web3-ready.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/web3-ready.jpg', type: 'video' }
+]
+
+export const DISCOVERED_FLUXAI_BACKGROUNDS: BackgroundOption[] = [
+
+]

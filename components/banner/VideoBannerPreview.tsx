@@ -250,7 +250,7 @@ export function VideoBannerPreview({
 }: VideoBannerPreviewProps) {
   return (
     <div className="relative border border-gray-300 rounded-lg shadow-lg max-w-full h-auto overflow-hidden">
-      <div className="aspect-[1200/650] relative">
+      <div className="aspect-[1200/650] relative [container-type:size]">
         <video
           src={videoPath}
           className="absolute inset-0 w-full h-full object-cover"
@@ -266,16 +266,49 @@ export function VideoBannerPreview({
           <NextImage
             src={logoPath}
             alt="Product logo"
-            width={260}
-            height={80}
-            className="absolute top-6 left-6 w-[180px] h-auto object-contain"
+            width={400}
+            height={120}
+            className="absolute h-auto object-contain"
+            style={{
+              left: `${(LOGO_X / WIDTH) * 100}cqw`,
+              top: `${(LOGO_Y / HEIGHT) * 100}cqh`,
+              width: `${(LOGO_WIDTH / WIDTH) * 100}cqw`,
+            }}
             unoptimized
           />
         )}
 
-        <div className="absolute left-6 right-6 bottom-8 text-white">
-          <h3 className="text-2xl font-bold leading-tight mb-3">{headline}</h3>
-          {subtext.trim() && <p className="text-sm text-white/85 leading-relaxed">{subtext}</p>}
+        <div
+          className="absolute text-white"
+          style={{
+            left: `${(TEXT_LEFT / WIDTH) * 100}cqw`,
+            right: `${(TEXT_RIGHT / WIDTH) * 100}cqw`,
+            bottom: `${(TEXT_BOTTOM / HEIGHT) * 100}cqh`,
+          }}
+        >
+          <h3
+            className="font-bold"
+            style={{
+              fontFamily: 'Gilroy, system-ui, -apple-system, sans-serif',
+              fontSize: `${(112 / WIDTH) * 100}cqw`,
+              lineHeight: `${HEADLINE_LINE_HEIGHT / 112}`,
+              marginBottom: subtext.trim() ? `${(64 / HEIGHT) * 100}cqh` : 0,
+            }}
+          >
+            {headline}
+          </h3>
+          {subtext.trim() && (
+            <p
+              className="text-white/85"
+              style={{
+                fontFamily: 'Figtree, system-ui, -apple-system, sans-serif',
+                fontSize: `${(48 / WIDTH) * 100}cqw`,
+                lineHeight: `${SUBTEXT_LINE_HEIGHT / 48}`,
+              }}
+            >
+              {subtext}
+            </p>
+          )}
         </div>
       </div>
     </div>

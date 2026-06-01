@@ -1,6 +1,8 @@
 ﻿import {
   DISCOVERED_FLUX_BACKGROUNDS,
+  DISCOVERED_FLUXAI_BACKGROUNDS,
   DISCOVERED_SSP_BACKGROUNDS,
+  DISCOVERED_ZELCORE_BACKGROUNDS,
 } from './discovered-backgrounds'
 
 export interface BackgroundOption {
@@ -9,13 +11,16 @@ export interface BackgroundOption {
   path: string
   thumbnail: string
   type?: 'image' | 'video'
+  headline?: string
+  subtext?: string
 }
 
 export interface ProductConfig {
-  id: 'flux' | 'ssp'
+  id: 'flux' | 'ssp' | 'zelcore' | 'fluxai'
   name: string
   subtitle: string
   logoPath: string
+  navLogoPath?: string
   defaults: {
     headline: string
     subtext: string
@@ -31,6 +36,22 @@ function mergeBackgrounds(
   const seenPaths = new Set(manual.map((item) => item.path))
   const extras = discovered.filter((item) => !seenPaths.has(item.path))
   return [...manual, ...extras]
+}
+
+type BackgroundCopy = Pick<BackgroundOption, 'headline' | 'subtext'>
+
+function stripVideoSuffix(name: string): string {
+  return name.replace(/\s+\(Video\)$/i, '')
+}
+
+function withBackgroundCopy(
+  backgrounds: BackgroundOption[],
+  copyByName: Record<string, BackgroundCopy>
+): BackgroundOption[] {
+  return backgrounds.map((background) => {
+    const copy = copyByName[stripVideoSuffix(background.name)]
+    return copy ? { ...background, ...copy } : background
+  })
 }
 
 const FLUX_BACKGROUNDS: BackgroundOption[] = [
@@ -79,6 +100,149 @@ const FLUX_BACKGROUNDS: BackgroundOption[] = [
   { id: '43', name: 'Orbit Platforms', path: '/backgrounds/43.png', thumbnail: '/backgrounds/thumbnails/43.jpg' },
   { id: '44', name: 'Orbit Platforms 2', path: '/backgrounds/44.png', thumbnail: '/backgrounds/thumbnails/44.jpg' },
   { id: '45', name: 'Orbit Platforms 3', path: '/backgrounds/45.png', thumbnail: '/backgrounds/thumbnails/45.jpg' },
+]
+
+const ZELCORE_COPY: Record<string, BackgroundCopy> = {
+  'True Self-Custody': {
+    headline: 'True Self-Custody',
+    subtext: 'Your keys, your crypto. Zelcore never holds your funds, seed phrase, or private keys. You stay in control at all times.',
+  },
+  '100K+ Assets in One Wallet': {
+    headline: '100K+ Assets in One Wallet',
+    subtext: 'Bitcoin, Ethereum, Solana, Avalanche, Flux, Polygon, and thousands more. Manage your entire portfolio without bouncing between apps.',
+  },
+  '80+ Blockchains Supported': {
+    headline: '80+ Blockchains Supported',
+    subtext: 'One wallet for the chains you actually use. Store, send, receive, swap, and track assets across a truly multi-chain ecosystem.',
+  },
+  'Desktop, Mobile, and Browser': {
+    headline: 'Desktop, Mobile, and Browser',
+    subtext: 'Use Zelcore on Windows, macOS, Linux, iOS, Android, and browser extension. Your crypto command center goes wherever you do.',
+  },
+  'Built-In Swap Access': {
+    headline: 'Built-In Swap Access',
+    subtext: 'Trade between assets directly inside Zelcore. No extra exchange tabs, no complicated routing, no leaving your wallet workflow.',
+  },
+  'Buy, Sell, Send, Receive': {
+    headline: 'Buy, Sell, Send, Receive',
+    subtext: 'Everything you expect from a modern crypto wallet in one interface. Simple enough for daily use, powerful enough for serious holders.',
+  },
+  'Biometric Security': {
+    headline: 'Biometric Security',
+    subtext: 'Unlock and approve wallet access with fingerprint or face ID on supported devices. Fast access without weakening control.',
+  },
+  'Optional Decentralized 2FA': {
+    headline: 'Optional Decentralized 2FA',
+    subtext: 'Add another layer of protection without relying on a centralized custodian. Security that keeps ownership in your hands.',
+  },
+  'Portfolio Visibility': {
+    headline: 'Portfolio Visibility',
+    subtext: 'Track balances, assets, and activity across chains from one place. Zelcore turns scattered holdings into a clear portfolio view.',
+  },
+  'Non-Custodial by Design': {
+    headline: 'Non-Custodial by Design',
+    subtext: 'No exchange custody. No hidden account lockups. No one can move your funds but you.',
+  },
+  'Hardware Wallet Support': {
+    headline: 'Hardware Wallet Support',
+    subtext: 'Connect additional protection for long-term holdings and higher-value assets. Keep convenience and security in the same workflow.',
+  },
+  'Web3 Ready': {
+    headline: 'Web3 Ready',
+    subtext: 'Access decentralized apps and blockchain ecosystems from a wallet built for multi-chain activity, not single-chain limitations.',
+  },
+  'Free Forever Core Wallet': {
+    headline: 'Free Forever Core Wallet',
+    subtext: 'Download and use Zelcore without subscription fees. A serious crypto wallet should not charge you just to hold your own assets.',
+  },
+  'Built for Real Users': {
+    headline: 'Built for Real Users',
+    subtext: 'Manage crypto on the device you already use, with an interface built for everyday sending, swapping, and portfolio control.',
+  },
+  'One Wallet, Full Ownership': {
+    headline: 'One Wallet, Full Ownership',
+    subtext: 'Zelcore brings assets, chains, swaps, and security into one place while keeping the most important thing untouched: your control.',
+  },
+}
+
+const SSP_COPY: Record<string, BackgroundCopy> = {
+  'True Self Custody': {
+    headline: 'True Self-Custody',
+    subtext: 'Your keys, your coins. No third party ever holds or touches your assets. Unlike Fireblocks or BitGo, nobody can freeze or seize your funds.',
+  },
+  'Multi Party Approval': {
+    headline: 'Multi-Party Approval',
+    subtext: 'No single person can move funds alone. CEO + CFO + Board Member must agree. Eliminates internal fraud and rogue actors.',
+  },
+  'Multi Chain Native': {
+    headline: 'Multi-Chain Native',
+    subtext: 'Bitcoin, Ethereum, Polygon, Avalanche, Flux, and 10+ more. One platform, all chains - no juggling multiple tools.',
+  },
+  '90% Cheaper Than Alternatives': {
+    headline: '90% Cheaper Than Alternatives',
+    subtext: 'Fireblocks costs $100K-$1M/year. SSP Enterprise core is free. Premium starts at 0.3% AUM annually.',
+  },
+  'Security Audited Halborn': {
+    headline: 'Security Audited by Halborn',
+    subtext: 'Not a promise. A proven, independent audit with 100% of issues resolved. March 2025.',
+  },
+  'Fully Open Source': {
+    headline: 'Fully Open Source',
+    subtext: 'Every line of code is public. No black boxes, no hidden backdoors. You can verify everything yourself.',
+  },
+  'Biometrics Security': {
+    headline: 'Mobile-Native Biometric Signing',
+    subtext: 'Each approver signs from their phone with fingerprint/face ID. Built on the same SSP Key app already in use.',
+  },
+  'Biometric Security': {
+    headline: 'Mobile-Native Biometric Signing',
+    subtext: 'Each approver signs from their phone with fingerprint/face ID. Built on the same SSP Key app already in use.',
+  },
+  'Complete Audit Trail': {
+    headline: 'Complete Audit Trail',
+    subtext: 'Every transaction, every approval, every rejection - immutably logged for compliance and reporting.',
+  },
+  '1 Hour Setup': {
+    headline: '1-Hour Setup Ceremony',
+    subtext: 'No 4-8 week enterprise onboarding. Get a multi-party business wallet running in under an hour.',
+  },
+  'No Vendor Lock In': {
+    headline: 'No Vendor Lock-In',
+    subtext: "Open source means you can self-host, fork, or migrate anytime. You're never dependent on a company staying in business.",
+  },
+}
+
+const ZELCORE_BACKGROUNDS: BackgroundOption[] = [
+  { id: 'zelcore-true-self-custody', name: 'True Self-Custody', path: '/products/zelcore/backgrounds/true-self-custody.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/true-self-custody.jpg' },
+  { id: 'zelcore-100k-assets-in-one-wallet', name: '100K+ Assets in One Wallet', path: '/products/zelcore/backgrounds/100k-assets-in-one-wallet.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/100k-assets-in-one-wallet.jpg' },
+  { id: 'zelcore-80-plus-blockchains-supported', name: '80+ Blockchains Supported', path: '/products/zelcore/backgrounds/80-plus-blockchains-supported.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/80-plus-blockchains-supported.jpg' },
+  { id: 'zelcore-desktop-mobile-and-browser', name: 'Desktop, Mobile, and Browser', path: '/products/zelcore/backgrounds/desktop-mobile-and-browser.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/desktop-mobile-and-browser.jpg' },
+  { id: 'zelcore-built-in-swap-access', name: 'Built-In Swap Access', path: '/products/zelcore/backgrounds/built-in-swap-access.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-in-swap-access.jpg' },
+  { id: 'zelcore-buy-sell-send-receive', name: 'Buy, Sell, Send, Receive', path: '/products/zelcore/backgrounds/buy-sell-send-receive.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/buy-sell-send-receive.jpg' },
+  { id: 'zelcore-biometric-security', name: 'Biometric Security', path: '/products/zelcore/backgrounds/biometric-security.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/biometric-security.jpg' },
+  { id: 'zelcore-optional-decentralized-2fa', name: 'Optional Decentralized 2FA', path: '/products/zelcore/backgrounds/optional-decentralized-2fa.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/optional-decentralized-2fa.jpg' },
+  { id: 'zelcore-portfolio-visibility', name: 'Portfolio Visibility', path: '/products/zelcore/backgrounds/portfolio-visibility.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/portfolio-visibility.jpg' },
+  { id: 'zelcore-non-custodial-by-design', name: 'Non-Custodial by Design', path: '/products/zelcore/backgrounds/non-custodial-by-design.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/non-custodial-by-design.jpg' },
+  { id: 'zelcore-hardware-wallet-support', name: 'Hardware Wallet Support', path: '/products/zelcore/backgrounds/hardware-wallet-support.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/hardware-wallet-support.jpg' },
+  { id: 'zelcore-web3-ready', name: 'Web3 Ready', path: '/products/zelcore/backgrounds/web3-ready.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/web3-ready.jpg' },
+  { id: 'zelcore-free-forever-core-wallet', name: 'Free Forever Core Wallet', path: '/products/zelcore/backgrounds/free-forever-core-wallet.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/free-forever-core-wallet.jpg' },
+  { id: 'zelcore-built-for-real-users', name: 'Built for Real Users', path: '/products/zelcore/backgrounds/built-for-real-users.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-for-real-users.jpg' },
+  { id: 'zelcore-one-wallet-full-ownership', name: 'One Wallet, Full Ownership', path: '/products/zelcore/backgrounds/one-wallet-full-ownership.jpg', thumbnail: '/products/zelcore/backgrounds/thumbnails/one-wallet-full-ownership.jpg' },
+  { id: 'zelcore-v-true-self-custody', name: 'True Self-Custody (Video)', path: '/products/zelcore/backgrounds/true-self-custody.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/true-self-custody.jpg', type: 'video' },
+  { id: 'zelcore-v-100k-assets-in-one-wallet', name: '100K+ Assets in One Wallet (Video)', path: '/products/zelcore/backgrounds/100k-assets-in-one-wallet.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/100k-assets-in-one-wallet.jpg', type: 'video' },
+  { id: 'zelcore-v-80-plus-blockchains-supported', name: '80+ Blockchains Supported (Video)', path: '/products/zelcore/backgrounds/80-plus-blockchains-supported.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/80-plus-blockchains-supported.jpg', type: 'video' },
+  { id: 'zelcore-v-desktop-mobile-and-browser', name: 'Desktop, Mobile, and Browser (Video)', path: '/products/zelcore/backgrounds/desktop-mobile-and-browser.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/desktop-mobile-and-browser.jpg', type: 'video' },
+  { id: 'zelcore-v-built-in-swap-access', name: 'Built-In Swap Access (Video)', path: '/products/zelcore/backgrounds/built-in-swap-access.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-in-swap-access.jpg', type: 'video' },
+  { id: 'zelcore-v-buy-sell-send-receive', name: 'Buy, Sell, Send, Receive (Video)', path: '/products/zelcore/backgrounds/buy-sell-send-receive.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/buy-sell-send-receive.jpg', type: 'video' },
+  { id: 'zelcore-v-biometric-security', name: 'Biometric Security (Video)', path: '/products/zelcore/backgrounds/biometric-security.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/biometric-security.jpg', type: 'video' },
+  { id: 'zelcore-v-optional-decentralized-2fa', name: 'Optional Decentralized 2FA (Video)', path: '/products/zelcore/backgrounds/optional-decentralized-2fa.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/optional-decentralized-2fa.jpg', type: 'video' },
+  { id: 'zelcore-v-portfolio-visibility', name: 'Portfolio Visibility (Video)', path: '/products/zelcore/backgrounds/portfolio-visibility.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/portfolio-visibility.jpg', type: 'video' },
+  { id: 'zelcore-v-non-custodial-by-design', name: 'Non-Custodial by Design (Video)', path: '/products/zelcore/backgrounds/non-custodial-by-design.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/non-custodial-by-design.jpg', type: 'video' },
+  { id: 'zelcore-v-hardware-wallet-support', name: 'Hardware Wallet Support (Video)', path: '/products/zelcore/backgrounds/hardware-wallet-support.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/hardware-wallet-support.jpg', type: 'video' },
+  { id: 'zelcore-v-web3-ready', name: 'Web3 Ready (Video)', path: '/products/zelcore/backgrounds/web3-ready.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/web3-ready.jpg', type: 'video' },
+  { id: 'zelcore-v-free-forever-core-wallet', name: 'Free Forever Core Wallet (Video)', path: '/products/zelcore/backgrounds/free-forever-core-wallet.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/free-forever-core-wallet.jpg', type: 'video' },
+  { id: 'zelcore-v-built-for-real-users', name: 'Built for Real Users (Video)', path: '/products/zelcore/backgrounds/built-for-real-users.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/built-for-real-users.jpg', type: 'video' },
+  { id: 'zelcore-v-one-wallet-full-ownership', name: 'One Wallet, Full Ownership (Video)', path: '/products/zelcore/backgrounds/one-wallet-full-ownership.mp4', thumbnail: '/products/zelcore/backgrounds/thumbnails/one-wallet-full-ownership.jpg', type: 'video' },
 ]
 
 const SSP_BACKGROUNDS: BackgroundOption[] = [
@@ -233,6 +397,7 @@ export const PRODUCTS: Record<ProductConfig['id'], ProductConfig> = {
     name: 'Flux',
     subtitle: 'Flux Marketing',
     logoPath: '/flux-logo.svg',
+    navLogoPath: '/Flux_blue.svg',
     defaults: {
       headline: 'Write a great headline here',
       subtext: 'Enter description text. It can be the details of the post, a feature of Flux, or any other relevant information. Or remove if no need.',
@@ -246,14 +411,42 @@ export const PRODUCTS: Record<ProductConfig['id'], ProductConfig> = {
     subtitle: 'SSP Marketing',
     logoPath: '/products/ssp/ssp-enterprise-black.png',
     defaults: {
-      headline: 'Write an SSP headline here',
-      subtext: 'Add SSP-specific marketing copy. You can remove this line if not needed.',
+      headline: 'True Self-Custody',
+      subtext: 'Your keys, your coins. No third party ever holds or touches your assets. Unlike Fireblocks or BitGo, nobody can freeze or seize your funds.',
       logoOverlayEnabled: false,
     },
-    backgrounds: mergeBackgrounds(SSP_BACKGROUNDS, DISCOVERED_SSP_BACKGROUNDS),
+    backgrounds: withBackgroundCopy(mergeBackgrounds(SSP_BACKGROUNDS, DISCOVERED_SSP_BACKGROUNDS), SSP_COPY),
+  },
+  zelcore: {
+    id: 'zelcore',
+    name: 'Zelcore',
+    subtitle: 'Zelcore Marketing',
+    logoPath: '/products/zelcore/zelcore-white.png',
+    navLogoPath: '/products/zelcore/zelcore-black.png',
+    defaults: {
+      headline: 'True Self-Custody',
+      subtext: 'Your keys, your crypto. Zelcore never holds your funds, seed phrase, or private keys. You stay in control at all times.',
+      logoOverlayEnabled: true,
+    },
+    backgrounds: withBackgroundCopy(
+      mergeBackgrounds(ZELCORE_BACKGROUNDS, DISCOVERED_ZELCORE_BACKGROUNDS),
+      ZELCORE_COPY
+    ),
+  },
+  fluxai: {
+    id: 'fluxai',
+    name: 'FluxAI',
+    subtitle: 'FluxAI Marketing',
+    logoPath: '/products/fluxai/fluxai-logo-black.png',
+    defaults: {
+      headline: 'Write a FluxAI headline here',
+      subtext: 'Add FluxAI-specific marketing copy. You can remove this line if not needed.',
+      logoOverlayEnabled: false,
+    },
+    backgrounds: mergeBackgrounds([], DISCOVERED_FLUXAI_BACKGROUNDS),
   },
 }
 
-export const PRODUCT_ORDER: ProductConfig['id'][] = ['flux', 'ssp']
+export const PRODUCT_ORDER: ProductConfig['id'][] = ['flux', 'ssp', 'zelcore', 'fluxai']
 
 

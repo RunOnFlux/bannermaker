@@ -117,7 +117,7 @@ function toTsArrayLiteral(items) {
 }
 
 async function run() {
-  const [flux, ssp] = await Promise.all([
+  const [flux, ssp, zelcore, fluxai] = await Promise.all([
     discoverProductBackgrounds({
       productKey: 'flux',
       baseDir: 'backgrounds',
@@ -127,6 +127,16 @@ async function run() {
       productKey: 'ssp',
       baseDir: path.join('products', 'ssp', 'backgrounds'),
       publicBasePath: '/products/ssp/backgrounds',
+    }),
+    discoverProductBackgrounds({
+      productKey: 'zelcore',
+      baseDir: path.join('products', 'zelcore', 'backgrounds'),
+      publicBasePath: '/products/zelcore/backgrounds',
+    }),
+    discoverProductBackgrounds({
+      productKey: 'fluxai',
+      baseDir: path.join('products', 'fluxai', 'backgrounds'),
+      publicBasePath: '/products/fluxai/backgrounds',
     }),
   ])
 
@@ -138,6 +148,10 @@ async function run() {
 export const DISCOVERED_FLUX_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral(flux)}
 
 export const DISCOVERED_SSP_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral(ssp)}
+
+export const DISCOVERED_ZELCORE_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral(zelcore)}
+
+export const DISCOVERED_FLUXAI_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral(fluxai)}
 `
 
   await fs.writeFile(OUTPUT_FILE, content, 'utf8')

@@ -8,9 +8,16 @@ import { TextEditor } from './TextEditor'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Check, Download } from 'lucide-react'
-import { PRODUCT_ORDER, PRODUCTS, type ProductConfig } from '@/lib/products'
+import { PRODUCT_ORDER, PRODUCTS, type BackgroundOption, type ProductConfig } from '@/lib/products'
 
 type BackgroundSection = 'video' | 'image'
+
+function getBackgroundCopy(product: ProductConfig, background?: BackgroundOption) {
+  return {
+    headline: background?.headline ?? product.defaults.headline,
+    subtext: background?.subtext ?? product.defaults.subtext,
+  }
+}
 
 export function BannerEditor() {
   const [productId, setProductId] = useState<ProductConfig['id']>('flux')
@@ -31,8 +38,10 @@ export function BannerEditor() {
       defaultSection === 'video' ? item.type === 'video' : item.type !== 'video'
     )
 
-    setHeadline(currentProduct.defaults.headline)
-    setSubtext(currentProduct.defaults.subtext)
+    const copy = getBackgroundCopy(currentProduct, firstInSection)
+
+    setHeadline(copy.headline)
+    setSubtext(copy.subtext)
     setBackgroundSection(defaultSection)
     setSelectedBackground(firstInSection?.path ?? currentProduct.backgrounds[0]?.path ?? '')
     setShowLogoOverlay(currentProduct.defaults.logoOverlayEnabled)
@@ -61,8 +70,15 @@ export function BannerEditor() {
       section === 'video' ? item.type === 'video' : item.type !== 'video'
     )
     if (firstInSection) {
-      setSelectedBackground(firstInSection.path)
+      handleBackgroundChange(firstInSection)
     }
+  }
+
+  const handleBackgroundChange = (background: BackgroundOption) => {
+    const copy = getBackgroundCopy(currentProduct, background)
+    setSelectedBackground(background.path)
+    setHeadline(copy.headline)
+    setSubtext(copy.subtext)
   }
 
   const handleExport = async (format: 'png' | 'webp') => {
@@ -178,40 +194,30 @@ export function BannerEditor() {
           <div className="border-b p-6">
             <h2 className="text-5xl font-bold leading-tight mb-5">Banner Maker</h2>
 
-            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6">
-              <button
-                type="button"
-                onClick={() => setProductId('flux')}
-                className={`h-14 rounded-md border px-4 transition-colors flex items-center justify-center ${
-                  productId === 'flux' ? 'border-gray-300 bg-gray-100' : 'border-gray-200 bg-white hover:bg-gray-50'
-                }`}
-              >
-                <Image
-                  src="/Flux_blue.svg"
-                  alt="Flux logo"
-                  width={190}
-                  height={56}
-                  className="h-10 w-auto object-contain"
-                />
-              </button>
+            <div className="grid grid-cols-2 gap-3">
+              {PRODUCT_ORDER.map((id) => {
+                const product = PRODUCTS[id]
+                const isActive = productId === id
 
-              <div className="h-24 w-[3px] rounded-full bg-black" />
-
-              <button
-                type="button"
-                onClick={() => setProductId('ssp')}
-                className={`h-14 rounded-md border px-4 transition-colors flex items-center justify-center ${
-                  productId === 'ssp' ? 'border-gray-300 bg-gray-100' : 'border-gray-200 bg-white hover:bg-gray-50'
-                }`}
-              >
-                <Image
-                  src={PRODUCTS.ssp.logoPath}
-                  alt="SSP logo"
-                  width={190}
-                  height={56}
-                  className="h-10 w-auto object-contain"
-                />
-              </button>
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setProductId(id)}
+                    className={`h-14 rounded-md border px-4 transition-colors flex items-center justify-center ${
+                      isActive ? 'border-gray-300 bg-gray-100' : 'border-gray-200 bg-white hover:bg-gray-50'
+                    }`}
+                  >
+                    <Image
+                      src={product.navLogoPath ?? product.logoPath}
+                      alt={`${product.name} logo`}
+                      width={190}
+                      height={56}
+                      className="h-10 w-auto max-w-full object-contain"
+                    />
+                  </button>
+                )
+              })}
             </div>
           </div>
 
@@ -264,7 +270,7 @@ export function BannerEditor() {
                         return (
                           <button
                             key={bg.id}
-                            onClick={() => setSelectedBackground(bg.path)}
+                            onClick={() => handleBackgroundChange(bg)}
                             className={`
                               relative w-full aspect-[1200/650] rounded-lg overflow-hidden
                               border-2 transition-all duration-200 cursor-pointer
