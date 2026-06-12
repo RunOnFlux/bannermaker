@@ -25,7 +25,8 @@ Flux Marketing Banner Generator app isfor creating professional marketing banner
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
+- FFmpeg and ffprobe available on `PATH` for server-side SSP Twitter video exports
 - npm or yarn
 
 ### Installation
@@ -51,6 +52,15 @@ npm run dev
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### SSP Twitter Export
+
+When an SSP video is selected, `Twitter Export (<5 MB)` sends the banner to the
+Next.js server for processing and downloads an H.264 MP4. SSP image exports keep
+using the existing PNG and WebP controls. The video exporter targets 4.8 MiB.
+
+The production Docker image installs FFmpeg automatically. Local development
+requires both `ffmpeg` and `ffprobe` to be installed and available on `PATH`.
 
 ## Usage
 

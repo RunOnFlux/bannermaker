@@ -30,6 +30,7 @@ export function BannerEditor() {
   const [showLogoOverlay, setShowLogoOverlay] = useState(currentProduct.defaults.logoOverlayEnabled)
   const [isExporting, setIsExporting] = useState(false)
   const [isExportMode, setIsExportMode] = useState(false)
+  const [exportError, setExportError] = useState('')
 
   useEffect(() => {
     const hasVideos = currentProduct.backgrounds.some((item) => item.type === 'video')
@@ -138,6 +139,49 @@ export function BannerEditor() {
       URL.revokeObjectURL(url)
     } catch (error) {
       console.error('Video export error:', error)
+    } finally {
+      setIsExporting(false)
+    }
+  }
+
+  const handleTwitterExport = async () => {
+    if (!selectedBackground || productId !== 'ssp') return
+
+    try {
+      setIsExporting(true)
+      setExportError('')
+
+      const response = await fetch('/api/ssp/twitter-export', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          backgroundPath: selectedBackground,
+          headline,
+          subtext,
+          showLogoOverlay,
+        }),
+      })
+
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        throw new Error(payload?.error ?? 'Twitter export failed.')
+      }
+
+      const blob = await response.blob()
+      const disposition = response.headers.get('Content-Disposition') ?? ''
+      const filenameMatch = disposition.match(/filename="([^"]+)"/)
+      const filename =
+        filenameMatch?.[1] ??
+        `ssp-twitter-${new Date().toISOString().split('T')[0]}.mp4`
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.download = filename
+      link.href = url
+      link.click()
+      URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Twitter export error:', error)
+      setExportError(error instanceof Error ? error.message : 'Twitter export failed.')
     } finally {
       setIsExporting(false)
     }
@@ -443,6 +487,25 @@ export function BannerEditor() {
                   </>
                 )}
               </div>
+
+              {productId === 'ssp' && isVideoBackground && (
+                <Button
+                  onClick={handleTwitterExport}
+                  disabled={!canExport}
+                  variant="secondary"
+                  className="w-full cursor-pointer"
+                  size="lg"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  {isExporting ? 'Preparing Twitter Export...' : 'Twitter Export (<5 MB)'}
+                </Button>
+              )}
+
+              {exportError && (
+                <p role="alert" className="text-sm font-medium text-red-600 text-center">
+                  {exportError}
+                </p>
+              )}
 
               <p className="text-sm text-gray-500 text-center">
                 {isVideoBackground
