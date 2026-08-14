@@ -117,7 +117,7 @@ function toTsArrayLiteral(items) {
 }
 
 async function run() {
-  const [flux, ssp, zelcore, fluxai] = await Promise.all([
+  const [flux, ssp, zelcore, fluxai, cumulus] = await Promise.all([
     discoverProductBackgrounds({
       productKey: 'flux',
       baseDir: 'backgrounds',
@@ -138,6 +138,11 @@ async function run() {
       baseDir: path.join('products', 'fluxai', 'backgrounds'),
       publicBasePath: '/products/fluxai/backgrounds',
     }),
+    discoverProductBackgrounds({
+      productKey: 'cumulus',
+      baseDir: path.join('products', 'cumulus', 'backgrounds'),
+      publicBasePath: '/products/cumulus/backgrounds',
+    }),
   ])
 
   const content = `import type { BackgroundOption } from './products'
@@ -152,6 +157,8 @@ export const DISCOVERED_SSP_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral
 export const DISCOVERED_ZELCORE_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral(zelcore)}
 
 export const DISCOVERED_FLUXAI_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral(fluxai)}
+
+export const DISCOVERED_CUMULUS_BACKGROUNDS: BackgroundOption[] = ${toTsArrayLiteral(cumulus)}
 `
 
   await fs.writeFile(OUTPUT_FILE, content, 'utf8')

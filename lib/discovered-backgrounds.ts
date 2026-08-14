@@ -114,3 +114,12 @@ export const DISCOVERED_ZELCORE_BACKGROUNDS: BackgroundOption[] = [
 export const DISCOVERED_FLUXAI_BACKGROUNDS: BackgroundOption[] = [
 
 ]
+
+export const DISCOVERED_CUMULUS_BACKGROUNDS: BackgroundOption[] = [
+  { id: 'cumulus-decentralized network-image', name: 'Decentralized Network', path: '/products/cumulus/backgrounds/decentralized network.png', thumbnail: '/products/cumulus/backgrounds/thumbnails/decentralized network.jpg' },
+  { id: 'cumulus-every screen-image', name: 'Every Screen', path: '/products/cumulus/backgrounds/every screen.png', thumbnail: '/products/cumulus/backgrounds/thumbnails/every screen.jpg' },
+  { id: 'cumulus-free that works-image', name: 'Free That Works', path: '/products/cumulus/backgrounds/free that works.png', thumbnail: '/products/cumulus/backgrounds/thumbnails/free that works.jpg' },
+  { id: 'cumulus-no account no logs-image', name: 'No Account No Logs', path: '/products/cumulus/backgrounds/no account no logs.png', thumbnail: '/products/cumulus/backgrounds/thumbnails/no account no logs.jpg' },
+  { id: 'cumulus-pay in flux-image', name: 'Pay In Flux', path: '/products/cumulus/backgrounds/pay in flux.png', thumbnail: '/products/cumulus/backgrounds/thumbnails/pay in flux.jpg' },
+  { id: 'cumulus-private internet-image', name: 'Private Internet', path: '/products/cumulus/backgrounds/private internet.png', thumbnail: '/products/cumulus/backgrounds/thumbnails/private internet.jpg' }
+]

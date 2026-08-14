@@ -1,4 +1,5 @@
 ﻿import {
+  DISCOVERED_CUMULUS_BACKGROUNDS,
   DISCOVERED_FLUX_BACKGROUNDS,
   DISCOVERED_FLUXAI_BACKGROUNDS,
   DISCOVERED_SSP_BACKGROUNDS,
@@ -16,7 +17,7 @@ export interface BackgroundOption {
 }
 
 export interface ProductConfig {
-  id: 'flux' | 'ssp' | 'zelcore' | 'fluxai'
+  id: 'flux' | 'ssp' | 'zelcore' | 'fluxai' | 'cumulus'
   name: string
   subtitle: string
   logoPath: string
@@ -391,6 +392,33 @@ const SSP_BACKGROUNDS: BackgroundOption[] = [
   },
 ]
 
+const CUMULUS_COPY: Record<string, BackgroundCopy> = {
+  'Private Internet': {
+    headline: 'Private Internet, No Account, No Logs',
+    subtext: 'A decentralized VPN on Flux Cloud. Your WireGuard key is your identity — no email, no signup, nothing stored.',
+  },
+  'No Account No Logs': {
+    headline: "We Can't Hand Over What We Never Had",
+    subtext: 'No accounts, no logs, no email. Privacy by architecture: there is nothing to subpoena, leak, or sell.',
+  },
+  'Pay In Flux': {
+    headline: 'Pay in FLUX — About $0.99 a Month',
+    subtext: 'Send 20 FLUX from any wallet and every gateway unlocks your key within a minute. Prepay to stack months. No card, no billing account.',
+  },
+  'Free That Works': {
+    headline: 'Free That Actually Works',
+    subtext: 'Every country, every gateway, forever — throttled to 100 KB/s, fine for browsing and chat. Full speed is one wallet transfer away.',
+  },
+  'Decentralized Network': {
+    headline: 'No Accounts. No Server of Ours. Just the Chain.',
+    subtext: 'Payment is a fact on the Flux blockchain that every gateway reads independently. If we vanished tomorrow, the network keeps running.',
+  },
+  'Every Screen': {
+    headline: 'One Connect Button, on Every Screen You Own',
+    subtext: 'Web, desktop, and mobile share one design language and one key. Pay once and every device flips to full speed on its own.',
+  },
+}
+
 export const PRODUCTS: Record<ProductConfig['id'], ProductConfig> = {
   flux: {
     id: 'flux',
@@ -445,8 +473,24 @@ export const PRODUCTS: Record<ProductConfig['id'], ProductConfig> = {
     },
     backgrounds: mergeBackgrounds([], DISCOVERED_FLUXAI_BACKGROUNDS),
   },
+  cumulus: {
+    id: 'cumulus',
+    name: 'CumulusVPN',
+    subtitle: 'CumulusVPN Marketing',
+    logoPath: '/products/cumulus/cumulus-logo-white.png',
+    navLogoPath: '/products/cumulus/cumulus-logo-ink.png',
+    defaults: {
+      headline: 'Private Internet, No Account, No Logs',
+      subtext: 'A decentralized VPN on Flux Cloud. Your WireGuard key is your identity — no email, no signup, nothing stored.',
+      logoOverlayEnabled: true,
+    },
+    backgrounds: withBackgroundCopy(
+      mergeBackgrounds([], DISCOVERED_CUMULUS_BACKGROUNDS),
+      CUMULUS_COPY
+    ),
+  },
 }
 
-export const PRODUCT_ORDER: ProductConfig['id'][] = ['flux', 'ssp', 'zelcore', 'fluxai']
+export const PRODUCT_ORDER: ProductConfig['id'][] = ['flux', 'ssp', 'zelcore', 'fluxai', 'cumulus']
 
 
